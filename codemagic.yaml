@@ -10,12 +10,11 @@ workflows:
         script: |
           npm install
           npx cap add ios
-          # Podfile doğrudan ios klasörünün içinde oluşur
-          cd ios
+          cd ios/App
           pod install
       - name: Build ipa
         script: |
-          cd ios
+          cd ios/App
           WORKSPACE=$(find . -name "*.xcworkspace" | head -n 1)
           SCHEME=$(basename "$WORKSPACE" .xcworkspace)
           xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" -sdk iphoneos -configuration Release archive -archivePath build/App.xcarchive
